@@ -37,12 +37,12 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(sourceFolder)'
+    SourceFolder: '$(Agent.BuildDirectory)'
     Contents: '**'
-    TargetFolder: '$(stagingFolder)'
+    TargetFolder: '$(BUILD_ARTIFACTSTAGINGDIRECTORY)'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(stagingFolder)'
+    PathtoPublish: '$(BUILD_ARTIFACTSTAGINGDIRECTORY)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
