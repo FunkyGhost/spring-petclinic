@@ -9,6 +9,9 @@ variables:
   buildConfiguration: 'Release'
   sourceFolder: '$(Build.SourcesDirectory)/source'
   stagingFolder: '$(Build.ArtifactStagingDirectory)/staging'
+  currentDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
+  artifactName: "spring-petclinic-$(currentDate)"
+
 
 steps:
 # - script: echo Hello, world!
@@ -44,5 +47,12 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(BUILD_ARTIFACTSTAGINGDIRECTORY)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    ArtifactName: '$(artifactName)'
+
+- task: UniversalPackages@0
+  displayName: 'Publish Maven Package'
+  inputs:
+    command: 'publish'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)' # Location of the Maven package
+    vstsFeedPublish: 'Second Project/amasriv-Artifacts-Feed-01' # The project and feed name to publish to
+    vstsFeedPackagePublish: '$(artifactName)' # The package name
