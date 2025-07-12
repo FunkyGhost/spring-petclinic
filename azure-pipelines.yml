@@ -54,5 +54,6 @@ steps:
   inputs:
     command: 'publish'
     publishDirectory: '$(Build.ArtifactStagingDirectory)' # Location of the Maven package
-    vstsFeedPublish: 'Second Project/amasriv-Artifacts-Feed-01' # The project and feed name to publish to
+    feedsToUsePublish: 'internal'
+    vstsFeedPublish: 'amasriv-Artifacts-Feed-01' # The project and feed name to publish to
     vstsFeedPackagePublish: '$(artifactName)' # The package name
