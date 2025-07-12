@@ -1,0 +1,48 @@
+# Starter pipeline
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+  sourceFolder: '$(Build.SourcesDirectory)/source'
+  stagingFolder: '$(Build.ArtifactStagingDirectory)/staging'
+
+steps:
+# - script: echo Hello, world!
+#   displayName: 'Run a one-line script'
+
+# - script: |
+#     echo Add other tasks to build, test, and deploy your project.
+#     echo See https://aka.ms/yaml
+  # displayName: 'Run a multi-line script'
+
+- task: Maven@4
+  inputs:
+    azureSubscription: 'ME-MngEnvMCAP096943-amasriv-1(1)(a128fada-a7f9-4fe0-93af-2fd8dbe619ce)'
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.21'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: true
+    effectivePomSkip: true
+    sonarQubeRunAnalysis: false
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(sourceFolder)'
+    Contents: '**'
+    TargetFolder: '$(stagingFolder)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(stagingFolder)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
