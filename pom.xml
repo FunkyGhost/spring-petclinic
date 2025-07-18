@@ -285,6 +285,28 @@
       </snapshots>
     </repository>
     <repository>
+  <id>amasriv-Artifacts-Feed-01</id>
+  <url>https://pkgs.dev.azure.com/amasrivsandbox/_packaging/amasriv-Artifacts-Feed-01/maven/v1</url>
+  <releases>
+    <enabled>true</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
+    <distributionManagement>
+  <repository>
+  <id>amasriv-Artifacts-Feed-01</id>
+  <url>https://pkgs.dev.azure.com/amasrivsandbox/_packaging/amasriv-Artifacts-Feed-01/maven/v1</url>
+  <releases>
+    <enabled>true</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+  </repository>
+</distributionManagement>
+    <repository>
       <id>spring-milestones</id>
       <name>Spring Milestones</name>
       <url>https://repo.spring.io/milestone</url>
