@@ -49,6 +49,13 @@ steps:
     PathtoPublish: '$(BUILD_ARTIFACTSTAGINGDIRECTORY)'
     ArtifactName: '$(artifactName)'
 
+- task: PowerShell@2
+  inputs:
+        filePath: '$(System.DefaultWorkingDirectory)/temp/_as1'
+        errorActionPreference: 'continue'
+        verbosePreference: 'continue'
+        ignoreLASTEXITCODE: true
+
 - task: UniversalPackages@0
   displayName: 'Publish Maven Package'
   inputs:
@@ -57,3 +64,5 @@ steps:
     feedsToUsePublish: 'internal'
     vstsFeedPublish: 'amasriv-Artifacts-Feed-01' # The project and feed name to publish to
     vstsFeedPackagePublish: '$(artifactName)' # The package name
+
+
